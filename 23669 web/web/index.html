@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <title>Student Admission</title>
+    <link rel="stylesheet" href="style/indexstyle.css">
+    <style>
+        body {
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            height: 100vh;
+        }
+
+        .container {
+            width: 400px;
+            background-color: #fff;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .header {
+            text-align: center;
+            background-color: #d8d1d1;
+            padding: 10px 0;
+            color: #04045f;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .form {
+            padding: 20px;
+        }
+
+        .box {
+            width: 100%;
+        }
+
+        .format {
+            height: 42px;
+            padding: 10px 15px;
+            line-height: 22px;
+            font-size: 16px;
+            width: 100%;
+            border-radius: 4px;
+            border: 2px solid #d8d1d1;
+            margin-top: 8px;
+            margin-bottom: 16px;
+        }
+
+        .form-control label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .form-control input[type="text"],
+        .form-control input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            border-radius: 4px;
+            border: 2px solid #d8d1d1;
+        }
+
+        .display {
+            width: 120px;
+            height: 80px;
+            margin-top: 10px;
+            margin-bottom: 16px;
+            border: 1px solid #000;
+            background-position: center;
+            background-size: cover;
+        }
+
+        .button {
+            background-color: #04045f;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 4px;
+            border: 2px solid #04045f;
+            cursor: pointer;
+            width: 100%;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header" id="pageTitle">Student Admission</div>
+    <div class="form">
+        <form action="/studentAdmission" method="POST" enctype="multipart/form-data">
+            <label for="fileToUpload" id="uploadTitle">Select your Picture or File:</label>
+            <input type="file" name="fileToUpload" class="format">
+            <input type="submit" value="Upload" class="button">
+        </form>
+        <form action="sendConfirmationEmail" method="POST">
+            <div class="form-control">
+                <label for="recipientEmail">Recipient's Email</label>
+                <input type="text" name="recipientEmail" required class="format">
+            </div>
+            <div class="form-control">
+                <label for="confirmationCode">Confirmation Code</label>
+                <input type="text" name="confirmationCode" required class="format">
+            </div>
+            <input type="submit" value="Send Confirmation Email" class="button" id="button">
+        </form>
+        <p id="languages">Please select your preferred language:</p>
+        <br>
+        <select id="languageSelector" onchange="changeLanguage()" class="format">
+            <option value="en">English</option>
+            <option value="fr">French</option>
+            <option value="ar">Arabic</option>
+        </select>
+    </div>
+</div>
+<script>
+    function changeLanguage() {
+        var selectedLanguage = document.getElementById("languageSelector").value;
+        var languageData = {
+            en: {
+                pageTitle: "Student Admission Page",
+                paragraphMessage: "Hope you enjoy the tour!",
+                uploadTitle: "Select your Picture or File:",
+                languages: "Please select your preferred language:",
+                logi: "Login",
+                reg: "Register",
+                button: "Send Confirmation Email"
+            },
+            fr: {
+                pageTitle: "Page d'Admission des Étudiants",
+                paragraphMessage: "J'espère que vous apprécierez la visite !",
+                uploadTitle: "Sélectionnez votre image ou fichier :",
+                languages: "Veuillez sélectionner votre langue préférée :",
+                logi: "Connexion",
+                reg: "S'inscrire",
+                button: "Envoyer un courriel de confirmation"
+            },
+            ar: {
+                pageTitle: "صفحة قبول الطلاب",
+                paragraphMessage: "نأمل أن تستمتع بالجولة!",
+                uploadTitle: "حدد صورتك أو ملفك:",
+                languages: "الرجاء اختيار لغتك المفضلة:",
+                logi: "تسجيل الدخول",
+                reg: "سجل",
+                button: "إرسال رسالة تأكيد"
+            }
+        };
+
+        // Update the page content based on the selected language
+        document.getElementById("pageTitle").textContent = languageData[selectedLanguage].pageTitle;
+        document.getElementById("uploadTitle").textContent = languageData[selectedLanguage].uploadTitle;
+        document.getElementById("languages").textContent = languageData[selectedLanguage].languages;
+        document.getElementById("button").value = languageData[selectedLanguage].button;
+    }
+</script>
+</body>
+</html>
